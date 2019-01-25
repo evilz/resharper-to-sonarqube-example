@@ -18,5 +18,6 @@ Expand-Archive -LiteralPath .\tools\JetBrains.ReSharper.CommandLineTools.2018.3.
 dotnet tool install dotnet-reqube --tool-path tools
 .\tools\dotnet-reqube -i "resharper-report.xml" -o "sonarqube-report.json" -d "./src/"
 
+
 #SONAR END
 dotnet sonarscanner end /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96"
