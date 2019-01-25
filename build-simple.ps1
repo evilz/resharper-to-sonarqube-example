@@ -2,8 +2,8 @@
 
 
 # SONAR BEGIN
-dotnet tool install --global dotnet-sonarscanner
-dotnet sonarscanner begin /k:"evilz_resharper-to-sonarqube-example" /d:sonar.organization="evilz-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96" /d:sonar.externalIssuesReportPaths="sonarqube-report.json"
+dotnet tool install dotnet-sonarscanner  --tool-path tools
+.\tools\dotnet-sonarscanner begin /k:"evilz_resharper-to-sonarqube-example" /d:sonar.organization="evilz-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96" /d:sonar.externalIssuesReportPaths="sonarqube-report.json"
 
 
 # BUILD
@@ -20,4 +20,5 @@ dotnet tool install dotnet-reqube --tool-path tools
 
 
 #SONAR END
-dotnet sonarscanner end /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96"
+dotnet tool install dotnet-sonarscanner  --tool-path tools
+.\tools\dotnet-sonarscanner end /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96"
