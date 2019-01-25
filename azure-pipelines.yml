@@ -25,7 +25,7 @@ jobs:
     - script: dotnet tool install dotnet-sonarscanner --tool-path tools
       displayName: Install sonar
       
-    - script: ./tools/dotnet-sonarscanner begin /k:"evilz_resharper-to-sonarqube-example" /d:sonar.organization="evilz-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96" /d:sonar.externalIssuesReportPaths="sonarqube-report.json"
+    - script: .\tools\dotnet-sonarscanner begin /k:"evilz_resharper-to-sonarqube-example" /d:sonar.organization="evilz-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96" /d:sonar.externalIssuesReportPaths="sonarqube-report.json"
       displayName: Begin sonar
 
     - script: dotnet build "./src/Demo.Web.sln"
