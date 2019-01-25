@@ -14,8 +14,8 @@ jobs:
         version: '2.1.300' 
 
     - powershell: |
-        mkdir tool
-        wget "https://download.jetbrains.com/resharper/ReSharperUltimate.2018.3.1/JetBrains.ReSharper.CommandLineTools.2018.3.1.zip" -outfile "./tool/JetBrains.ReSharper.CommandLineTools.2018.3.1.zip"
+        mkdir tools
+        wget "https://download.jetbrains.com/resharper/ReSharperUltimate.2018.3.1/JetBrains.ReSharper.CommandLineTools.2018.3.1.zip" -outfile "./tools/JetBrains.ReSharper.CommandLineTools.2018.3.1.zip"
         Expand-Archive -LiteralPath .\tools\JetBrains.ReSharper.CommandLineTools.2018.3.1.zip -DestinationPath .\tools\JetBrains.ReSharper.CommandLineTools
       displayName: Install Resharper CMD  
 
