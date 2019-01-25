@@ -1,0 +1,40 @@
+# Node.js
+# Build a general Node.js application with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/vsts/pipelines/languages/javascript
+
+jobs:
+
+  - job: Windows
+    pool:
+      vmImage: 'vs2017-win2016'
+    steps:
+    - task: DotNetCoreInstaller@0
+      inputs:
+        version: '2.1.300' 
+
+    - powershell: |
+        Invoke-WebRequest -Uri "https://download.jetbrains.com/resharper/ReSharperUltimate.2018.3.1/JetBrains.ReSharper.CommandLineTools.2018.3.1.zip" -OutFile ".\tools\JetBrains.ReSharper.CommandLineTools.2018.3.1.zip"
+        Expand-Archive -LiteralPath .\tools\JetBrains.ReSharper.CommandLineTools.2018.3.1.zip -DestinationPath .\tools\JetBrains.ReSharper.CommandLineTools
+      displayName: Install Resharper CMD  
+
+    - script: dotnet tool install dotnet-reqube --tool-path tools
+      displayName: Install ReQube
+
+    - script: dotnet tool install --global dotnet-sonarscanner
+      displayName: Install sonar
+      
+    - script: dotnet sonarscanner begin /k:"evilz_resharper-to-sonarqube-example" /d:sonar.organization="evilz-github" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96" /d:sonar.externalIssuesReportPaths="sonarqube-report.json"
+      displayName: Begin sonar
+
+    - script: dotnet build "./src/Demo.Web.sln"
+      displayName: Build
+
+    - script: .\tools\JetBrains.ReSharper.CommandLineTools\InspectCode.exe "./src/Demo.Web.sln" -o="resharper-report.xml" -s=INFO
+      displayName: Resharper analyse
+
+    - script: .\tools\dotnet-reqube -i "resharper-report.xml" -o "sonarqube-report.json" -d "./src/"
+      displayName: ReQube analyse
+
+    - script: dotnet sonarscanner end /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96"
+      displayName: End sonar
