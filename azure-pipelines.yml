@@ -37,5 +37,5 @@ jobs:
     - script: .\tools\dotnet-reqube -i "resharper-report.xml" -o "sonarqube-report.json" -d "./src/"
       displayName: ReQube analyse
 
-    - script: dotnet tool install dotnet-sonarscanner --tool-path tools && ./tools/dotnet-sonarscanner end /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96"
+    - script: .\tools\dotnet-sonarscanner end /d:sonar.login="e7dcfc9c655f3ac6a72907131c093140882efa96"
       displayName: End sonar
